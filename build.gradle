@@ -1,0 +1,32 @@
+plugins {
+    id 'groovy'
+    id 'java'
+}
+
+group 'org.nicolopez603'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // https://mvnrepository.com/artifact/org.codehaus.groovy/groovy-all
+    implementation group: 'org.codehaus.groovy', name: 'groovy-all', version: '3.0.7', ext: 'pom'
+    testImplementation 'io.rest-assured:rest-assured:4.3.1'
+    // https://mvnrepository.com/artifact/org.testng/testng
+    testImplementation group: 'org.testng', name: 'testng', version: '7.4.0'
+    // https://mvnrepository.com/artifact/io.rest-assured/json-schema-validator
+    implementation group: 'io.rest-assured', name: 'json-schema-validator', version: '4.3.0'
+
+}
+
+test {
+    useTestNG(){
+        testLogging.showStandardStreams(true)
+        useDefaultListeners = true
+        reports.html.enabled(false)
+        parallel="tests"
+        includeGroups "smoke"
+    }
+}
